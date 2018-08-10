@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour {
         yield return new WaitForSeconds(startWait);
         while (true)
         {
-            Vector3 spawnPosition = spawnValues[Random.Range(0,10)];
+            Vector3 spawnPosition = spawnValues[Random.Range(0,9)];
             Quaternion spawnRotation = Quaternion.identity;
             Instantiate(Mole, spawnPosition, spawnRotation);
             yield return new WaitForSeconds(spawnWait);
