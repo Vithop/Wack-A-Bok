@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -11,35 +9,15 @@ public class GameController : MonoBehaviour {
     public Vector3[] spawnValues;
     public float startWait;
     public float spawnWait;
-    public float timeLeftOver;
     public float forceOfPop;
     public float speedOfPop;
 
-    private GameObject[] moles = new GameObject[9];
     private bool[] isActive = new bool[9];
+    private GameObject[] moles = new GameObject[9];
     private Rigidbody rbMole;
-
-
-    public Text gameOverText;
-    public Text scoreText;
-    public Text timeText;
-    public GameObject restartButton;
-
-    private bool gameOver;
-    private int score;
-
-
-
 
     // Use this for initialization
     void Start () {
-
-        gameOver = false;
-        gameOverText.text = "";
-        restartButton.SetActive(false);
-        score = 0;
-        UpdateScore();
-
         //set all holes as inactive on start
         for (int x = 0; x < 9; x++)
         {
@@ -52,18 +30,8 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
-        
-        if (timeLeftOver > 0)
-        {
-            UpdateTime();
-            timeLeftOver -= Time.deltaTime;
-        }
-        else
-        {
-            GameOver();
-        }
-    }
+		
+	}
 
     IEnumerator SpawnMoles()
     {
@@ -99,15 +67,17 @@ public class GameController : MonoBehaviour {
                 
 
             }
+            
+            
+            
 
-
-
-
-            if (gameOver)
-            {
-                restartButton.SetActive(true);
-                break;
-            }
+            //if (gameOver)
+            //{
+            //    restartButton.SetActive(true);
+            //    //              restartText.text = "Press 'R' for Restart";
+            //    //              restart = true;
+            //    break;
+            //}
         }
     }
     
@@ -120,33 +90,5 @@ public class GameController : MonoBehaviour {
         isActive[holeNum] = false;
 
 
-    }
-
-    public void UpdateTime()
-    {
-        timeText.text = "" + (int)timeLeftOver;
-    }
-
-    public void AddScore(int newScoreValue)
-    {
-        score += newScoreValue;
-        UpdateScore();
-    }
-
-    void UpdateScore()
-    {
-        scoreText.text = "Score: " + score;
-    }
-
-    public void GameOver()
-    {
-        gameOverText.text = "Game Over!";
-        gameOver = true;
-    }
-
-    public void RestartGame()
-    {
-        //Application.LoadLevel(Application.loadedLevel);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
