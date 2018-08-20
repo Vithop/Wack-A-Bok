@@ -90,12 +90,10 @@ public class GameController : MonoBehaviour {
 
                 //wait before spawning next mole and removing mole
                 yield return new WaitForSeconds(spawnWait);
-                Debug.Log(rbMole.position);
-                Debug.Log(spawnValues[holeNum]);
+                
                 float dis = Vector3.Distance(rbMole.position, spawnValues[holeNum]);
                 if(dis < 0.1f)
                 {
-                    Debug.Log("same position");
                     StartCoroutine(RemoveMole(holeNum));
                 }
                 
