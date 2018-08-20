@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -420,7 +420,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 487725684}
   m_LocalRotation: {x: 0.13052616, y: -0, z: -0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 318.37167, y: 125.20087, z: -850.78784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 842431446}
@@ -429,7 +429,58 @@ Transform:
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!114 &487725688
 MonoBehaviour:
+<<<<<<< HEAD
 =======
+=======
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487725684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41d5c2183be42c04fbc7e2aae7acbc29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reference: {fileID: 1649203871}
+--- !u!1 &577262611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 577262612}
+  - component: {fileID: 577262614}
+  - component: {fileID: 577262613}
+  - component: {fileID: 577262615}
+  m_Layer: 0
+  m_Name: Hole_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &577262612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 577262611}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalScale: {x: 1, y: 0, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1649203872}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &577262613
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 577262611}
+  m_Enabled: 1
+>>>>>>> parent of 968aaeb... fixes
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -486,11 +537,22 @@ GameObject:
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 128259547}
   - component: {fileID: 128259550}
   - component: {fileID: 128259549}
   m_Layer: 0
   m_Name: MaskTop
+=======
+  - component: {fileID: 842431446}
+  - component: {fileID: 842431445}
+  - component: {fileID: 842431444}
+  - component: {fileID: 842431443}
+  - component: {fileID: 842431447}
+  - component: {fileID: 842431449}
+  m_Layer: 0
+  m_Name: BallHammer
+>>>>>>> parent of 968aaeb... fixes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6322,6 +6384,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
 <<<<<<< HEAD
   m_GameObject: {fileID: 842431442}
+<<<<<<< HEAD
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.56, y: -1.16, z: 2.29}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
@@ -6331,11 +6394,46 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
 >>>>>>> 7dfe8039e8784eb91c8bf8664cac1274cb3a2b48
+=======
+  m_LocalRotation: {x: -0.13052616, y: -0, z: -0, w: 0.9914449}
+  m_LocalPosition: {x: 0.27, y: -1.45, z: 2.37}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+>>>>>>> parent of 968aaeb... fixes
   m_Children: []
   m_Father: {fileID: 878894755}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+--- !u!54 &842431447
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 842431442}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &842431449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 842431442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca1de78ccdcde2e44801207ecc4062a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 10
+>>>>>>> parent of 968aaeb... fixes
 --- !u!1 &917227446
 GameObject:
 =======
@@ -6712,14 +6810,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1188846835}
-  m_LocalRotation: {x: 0.10090621, y: -0, z: -0, w: 0.99489594}
-  m_LocalPosition: {x: -0.02, y: 4.72, z: -7.98}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -318.37167, y: -120.20087, z: 840.78784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 487725687}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 11.583, y: 0, z: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1188846837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6744,8 +6842,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCam: {fileID: 487725686}
-  weapon: {fileID: 1265757507592532, guid: 196510545a0173946bf3276556f32c55, type: 2}
-  playerWeapon: {fileID: 842431442}
+  ballHammer: {fileID: 842431442}
+  rb: {fileID: 842431447}
 --- !u!1 &1649203871
 =======
   m_CorrespondingSourceObject: {fileID: 33941866446238122, guid: 4c94a7ceb26daa747ab0fde2b81aec3d,
@@ -7101,11 +7199,15 @@ Transform:
   m_Children: []
 <<<<<<< HEAD
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 2
 =======
   m_Father: {fileID: 1428554964}
   m_RootOrder: 0
 >>>>>>> 7dfe8039e8784eb91c8bf8664cac1274cb3a2b48
+=======
+  m_RootOrder: 1
+>>>>>>> parent of 968aaeb... fixes
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2100437776
 MeshRenderer:

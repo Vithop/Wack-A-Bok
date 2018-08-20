@@ -6,28 +6,37 @@ public class ThrowHammer : MonoBehaviour
 {
 
     public Camera playerCam;
-    public GameObject weapon;
-    public GameObject playerWeapon;
-
-    private bool throwWeapon;
-    private Vector3 weaponTarget;
-
+    private bool throwHammer;
+    public GameObject ballHammer;
+    public Rigidbody rb;
+    private Vector3 hammerTarget;
+    private float startTapped;
+    private float endTapped;
 
     // Use this for initialization
     void Start()
     {
-        throwWeapon = false;
+        throwHammer = false;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
+        if (throwHammer)
+        {
+            endTapped = Time.time;
+            Debug.Log(endTapped - startTapped);
+            if (Input.touchCount == 1 && (endTapped - startTapped) > 1)
+                MakeHammer();
+        }*/
+
         if (Input.touchCount != 1)
         {
             return;
         }
-        Debug.Log("Touch detected");
-
         var ray = playerCam.ScreenPointToRay(Input.touches[0].position);
         Touch touch = Input.GetTouch(0);
         var hitInfo = new RaycastHit();
@@ -40,45 +49,51 @@ public class ThrowHammer : MonoBehaviour
                 {
                     if (hitInfo.transform.name != "GameField")
                         return;
-                    weaponTarget = hitInfo.point;
-                    throwWeapon = true;
+                    hammerTarget = hitInfo.point;
+                    throwHammer = true;
                 }
                 break;
 
             case TouchPhase.Ended:
+                ballHammer = MakeHammer();
                 break;
         }
+
+
+
+
+
 
     }
 
     void FixedUpdate()
     {
-        if (throwWeapon)
+        if (throwHammer)
         {
-            var rb = MakeWeapon().GetComponent<Rigidbody>();
+
             rb.constraints = RigidbodyConstraints.None;
-            rb.AddForce((weaponTarget - playerWeapon.transform.position) * 100);
-            Debug.Log("Weapon is thrown");
-            throwWeapon = false;
+            rb.AddForce(hammerTarget * 100);
+
+
         }
     }
 
 
-    GameObject MakeWeapon()
+    GameObject MakeHammer()
     {
-        Debug.Log("Weapon is being made");
-
-        var weaponPos = playerWeapon.transform.position + new Vector3(0f,0f,0.5f);
-        var weaponRot = playerWeapon.transform.rotation;
-
-        GameObject newWeapon = Instantiate(weapon, weaponPos, weaponRot);
-        var rb = newWeapon.GetComponent<Rigidbody>();
+        
+        GameObject newBallHammer = Instantiate(ballHammer /*, hammerPos, hammerRot*/);
+        rb = newBallHammer.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
-        newWeapon.transform.SetParent(gameObject.transform);
+        newBallHammer.transform.SetParent(playerCam.transform);
 
-        Debug.Log("Weapon is made");
+        var hammerPos = playerCam.transform.position + new Vector3(0.27f,-1.45f,2.37f) ;
+        var hammerRot = playerCam.transform.rotation;
 
-        return newWeapon;
+        newBallHammer.transform.position = hammerPos;
+        newBallHammer.transform.rotation = hammerRot;
+        throwHammer = false;
+        return newBallHammer;
     }
 
 }
