@@ -29,7 +29,7 @@ public class ThrowWeapon : MonoBehaviour
         Debug.Log("Touch detected");
 
         var ray = playerCam.ScreenPointToRay(Input.touches[0].position);
-        Touch touch = Input.GetTouch(0);
+        Touch touch = Input.GetTouch(1);
         var hitInfo = new RaycastHit();
 
         switch (touch.phase)
@@ -38,9 +38,10 @@ public class ThrowWeapon : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hitInfo))
                 {
-                    if (hitInfo.transform.name != "GameField" || hitInfo.transform.name != "PillarMole")
-                        return;
-                    weaponTarget = hitInfo.point;
+                    if (hitInfo.transform.name != "GameField" && !hitInfo.transform.name.Contains("PillarMole"))
+                        return;                    
+                    weaponTarget = hitInfo.transform.position;
+                    
                     throwWeapon = true;
                 }
                 break;
@@ -68,7 +69,7 @@ public class ThrowWeapon : MonoBehaviour
     {
         Debug.Log("Weapon is being made");
 
-        var weaponPos = playerWeapon.transform.position + new Vector3(0f, 0f, 0.5f);
+        var weaponPos = playerWeapon.transform.position + new Vector3(0f, 0.006f, 0.56f);
         var weaponRot = playerWeapon.transform.rotation;
 
         GameObject newWeapon = Instantiate(weapon, weaponPos, weaponRot);
