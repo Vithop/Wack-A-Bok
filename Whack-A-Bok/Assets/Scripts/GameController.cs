@@ -24,7 +24,10 @@ public class GameController : MonoBehaviour {
     public Text scoreText;
     public Text timeText;
     public GameObject restartButton;
+    //public Button playPauseButton;
+    //public GameObject background;
 
+    private bool paused;
     private bool gameOver;
     private int score;
 
@@ -37,6 +40,7 @@ public class GameController : MonoBehaviour {
         gameOver = false;
         gameOverText.text = "";
         restartButton.SetActive(false);
+        //background.SetActive(false);
         score = 0;
         UpdateScore();
 
@@ -52,8 +56,8 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
-        
+
+         
         if (timeLeftOver > 0)
         {
             UpdateTime();
@@ -63,54 +67,55 @@ public class GameController : MonoBehaviour {
         {
             GameOver();
         }
+        
     }
 
     IEnumerator SpawnMoles()
     {
         yield return new WaitForSeconds(startWait);
-        while (true)
-        {
-            //choose a hole to pop mole out of
-            int holeNum = Random.Range(0, 9);
-
-            if (!isActive[holeNum])
+        
+            while (true)
             {
-                //create a mole a record where mole is
-                moles[holeNum] = Instantiate(Mole, spawnValues[holeNum] - new Vector3(0, 0.5f, 0), Quaternion.identity);
-                isActive[holeNum] = true;
+                Debug.Log("Is Running");
+                //choose a hole to pop mole out of
+                int holeNum = Random.Range(0, 9);
 
-                //create rigidbody
-                rbMole = moles[holeNum].GetComponent<Rigidbody>();
-
-                //poping animation
-                rbMole.detectCollisions = false;
-                rbMole.AddForce(transform.up * forceOfPop);
-                yield return new WaitForSeconds(speedOfPop);
-                rbMole.detectCollisions = true;
-
-                //wait before spawning next mole and removing mole
-                yield return new WaitForSeconds(spawnWait);
-                Debug.Log(rbMole.position);
-                Debug.Log(spawnValues[holeNum]);
-                float dis = Vector3.Distance(rbMole.position, spawnValues[holeNum]);
-                if(dis < 0.1f)
+                if (!isActive[holeNum])
                 {
-                    Debug.Log("same position");
-                    StartCoroutine(RemoveMole(holeNum));
+                    //create a mole a record where mole is
+                    moles[holeNum] = Instantiate(Mole, spawnValues[holeNum] - new Vector3(0, 0.5f, 0), Quaternion.identity);
+                    isActive[holeNum] = true;
+
+                    //create rigidbody
+                    rbMole = moles[holeNum].GetComponent<Rigidbody>();
+
+                    //poping animation
+                    rbMole.detectCollisions = false;
+                    rbMole.AddForce(transform.up * forceOfPop);
+                    yield return new WaitForSeconds(speedOfPop);
+                    rbMole.detectCollisions = true;
+
+                    //wait before spawning next mole and removing mole
+                    yield return new WaitForSeconds(spawnWait);
+                    //Debug.Log(rbMole.position);
+                    //Debug.Log(spawnValues[holeNum]);
+                    float dis = Vector3.Distance(rbMole.position, spawnValues[holeNum]);
+                    if (dis < 0.1f)
+                    {
+                        //Debug.Log("same position");
+                        StartCoroutine(RemoveMole(holeNum));
+                    }
+
+
                 }
-                
-
+                if (gameOver)
+                {
+                    break;
+                }
             }
+            Debug.Log("Is not running");
 
-
-
-
-            if (gameOver)
-            {
-                restartButton.SetActive(true);
-                break;
-            }
-        }
+        
     }
     
 
@@ -140,15 +145,32 @@ public class GameController : MonoBehaviour {
         scoreText.text = "Score: " + score;
     }
 
+    public void Pause(bool isPaused)
+    {
+
+        if (isPaused)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+
+        Debug.Log("paused is :" + isPaused);
+        
+
+    }
+
     public void GameOver()
     {
+        restartButton.SetActive(true);
         gameOverText.text = "Game Over!";
         gameOver = true;
     }
 
     public void RestartGame()
     {
-        //Application.LoadLevel(Application.loadedLevel);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
