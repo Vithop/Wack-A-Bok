@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayPauseToggle : MonoBehaviour {
 
     public GameObject pause;
+    public GameObject pauseScreen;
 
     
 	// Use this for initialization
@@ -13,6 +14,7 @@ public class PlayPauseToggle : MonoBehaviour {
     {
         //Debug.Log(switcher);
         pause.SetActive(!switcher);
+        pauseScreen.SetActive(switcher);
         
     }
     

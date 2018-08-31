@@ -23,9 +23,9 @@ public class GameController : MonoBehaviour {
     public Text gameOverText;
     public Text scoreText;
     public Text timeText;
+    public GameObject playPauseButton;
     public GameObject restartButton;
-    //public Button playPauseButton;
-    //public GameObject background;
+    public GameObject homeBotton;
 
     private bool paused;
     private bool gameOver;
@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour {
         gameOver = false;
         gameOverText.text = "";
         restartButton.SetActive(false);
-        //background.SetActive(false);
+        homeBotton.SetActive(false);
         score = 0;
         UpdateScore();
 
@@ -164,7 +164,9 @@ public class GameController : MonoBehaviour {
 
     public void GameOver()
     {
+        playPauseButton.SetActive(false);
         restartButton.SetActive(true);
+        homeBotton.SetActive(true);
         gameOverText.text = "Game Over!";
         gameOver = true;
     }
