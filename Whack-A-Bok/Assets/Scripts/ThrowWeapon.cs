@@ -29,7 +29,7 @@ public class ThrowWeapon : MonoBehaviour
         Debug.Log("Touch detected");
 
         var ray = playerCam.ScreenPointToRay(Input.touches[0].position);
-        Touch touch = Input.GetTouch(1);
+        Touch touch = Input.GetTouch(0);
         var hitInfo = new RaycastHit();
 
         switch (touch.phase)
@@ -38,9 +38,9 @@ public class ThrowWeapon : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hitInfo))
                 {
-                    if (hitInfo.transform.name != "GameField" && !hitInfo.transform.name.Contains("PillarMole"))
+                    if (hitInfo.transform.name != "GameField"/* && !hitInfo.transform.name.Contains("PillarMole")*/)
                         return;                    
-                    weaponTarget = hitInfo.transform.position;
+                    weaponTarget = hitInfo.point;
                     
                     throwWeapon = true;
                 }
@@ -58,7 +58,9 @@ public class ThrowWeapon : MonoBehaviour
         {
             var rb = MakeWeapon().GetComponent<Rigidbody>();
             rb.constraints = RigidbodyConstraints.None;
-            rb.AddForce((weaponTarget - playerWeapon.transform.position) * 100);
+            if (weaponTarget == new Vector3(0, 0, 0))
+                return;
+            rb.AddForce((weaponTarget - playerWeapon.transform.position) * 500);
             Debug.Log("Weapon is thrown");
             throwWeapon = false;
         }
@@ -69,7 +71,7 @@ public class ThrowWeapon : MonoBehaviour
     {
         Debug.Log("Weapon is being made");
 
-        var weaponPos = playerWeapon.transform.position + new Vector3(0f, 0.006f, 0.56f);
+        var weaponPos = playerWeapon.transform.position + (0.05f * new Vector3(0f, 0.04f, 0.57f));
         var weaponRot = playerWeapon.transform.rotation;
 
         GameObject newWeapon = Instantiate(weapon, weaponPos, weaponRot);
