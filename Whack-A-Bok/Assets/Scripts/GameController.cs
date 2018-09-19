@@ -39,6 +39,7 @@ public class GameController : MonoBehaviour {
     void Start () {
 
         gameOver = false;
+        Pause(false);
         gameOverText.text = "";
         restartButton.SetActive(false);
         homeBotton.SetActive(false);
@@ -77,7 +78,7 @@ public class GameController : MonoBehaviour {
         
             while (true)
             {
-                Debug.Log("Is Running");
+                //Debug.Log("Is Running");
                 //choose a hole to pop mole out of
                 int holeNum = Random.Range(0, 9);
 
@@ -119,7 +120,7 @@ public class GameController : MonoBehaviour {
                     break;
                 }
             }
-            Debug.Log("Is not running");
+            //Debug.Log("Is not running");
 
         
     }
@@ -161,7 +162,7 @@ public class GameController : MonoBehaviour {
             Time.timeScale = 1;
         }
 
-        Debug.Log("paused is :" + isPaused);
+        //Debug.Log("paused is :" + isPaused);
         
 
     }
