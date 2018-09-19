@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
+    public Camera firstPersonCamera;
     public GameObject Mole;
     public int numberOfMoles;
     public Vector3[] spawnValues;
@@ -38,6 +39,7 @@ public class GameController : MonoBehaviour {
     void Start () {
 
         gameOver = false;
+        Pause(false);
         gameOverText.text = "";
         restartButton.SetActive(false);
         homeBotton.SetActive(false);
@@ -76,35 +78,40 @@ public class GameController : MonoBehaviour {
         
             while (true)
             {
-                Debug.Log("Is Running");
+                //Debug.Log("Is Running");
                 //choose a hole to pop mole out of
                 int holeNum = Random.Range(0, 9);
 
-                if (!isActive[holeNum])
+            if (!isActive[holeNum])
+            {
+
+                //create a mole a record where mole is
+                moles[holeNum] = Instantiate(Mole, spawnValues[holeNum] - new Vector3(0, 0.5f, 0), Quaternion.identity);
+                isActive[holeNum] = true;
+
+                //Vector3 cameraPositionSameY = firstPersonCamera.transform.position;
+                //cameraPositionSameY.y = -0.5f;
+                //moles[holeNum].transform.LookAt(cameraPositionSameY, moles[holeNum].transform.up);
+
+                //create rigidbody
+                rbMole = moles[holeNum].GetComponent<Rigidbody>();
+
+                //poping animation
+                rbMole.detectCollisions = false;
+                rbMole.AddForce(transform.up * forceOfPop);
+                yield return new WaitForSeconds(speedOfPop);
+                rbMole.detectCollisions = true;
+
+                //wait before spawning next mole and removing mole
+                yield return new WaitForSeconds(spawnWait);
+                //Debug.Log(rbMole.position);
+                //Debug.Log(spawnValues[holeNum]);
+                float dis = Vector3.Distance(rbMole.position, spawnValues[holeNum]);
+                if (dis < 0.1f)
                 {
-                    //create a mole a record where mole is
-                    moles[holeNum] = Instantiate(Mole, spawnValues[holeNum] - new Vector3(0, 0.5f, 0), Quaternion.identity);
-                    isActive[holeNum] = true;
-
-                    //create rigidbody
-                    rbMole = moles[holeNum].GetComponent<Rigidbody>();
-
-                    //poping animation
-                    rbMole.detectCollisions = false;
-                    rbMole.AddForce(transform.up * forceOfPop);
-                    yield return new WaitForSeconds(speedOfPop);
-                    rbMole.detectCollisions = true;
-
-                    //wait before spawning next mole and removing mole
-                    yield return new WaitForSeconds(spawnWait);
-                    //Debug.Log(rbMole.position);
-                    //Debug.Log(spawnValues[holeNum]);
-                    float dis = Vector3.Distance(rbMole.position, spawnValues[holeNum]);
-                    if (dis < 0.1f)
-                    {
-                        //Debug.Log("same position");
-                        StartCoroutine(RemoveMole(holeNum));
-                    }
+                    //Debug.Log("same position");
+                    StartCoroutine(RemoveMole(holeNum));
+                }
 
 
                 }
@@ -113,7 +120,7 @@ public class GameController : MonoBehaviour {
                     break;
                 }
             }
-            Debug.Log("Is not running");
+            //Debug.Log("Is not running");
 
         
     }
@@ -125,8 +132,6 @@ public class GameController : MonoBehaviour {
         yield return new WaitForSeconds(speedOfPop*3);
         Destroy(moles[holeNum]);
         isActive[holeNum] = false;
-
-
     }
 
     public void UpdateTime()
@@ -157,7 +162,7 @@ public class GameController : MonoBehaviour {
             Time.timeScale = 1;
         }
 
-        Debug.Log("paused is :" + isPaused);
+        //Debug.Log("paused is :" + isPaused);
         
 
     }

@@ -7,6 +7,7 @@ public class PlayPauseToggle : MonoBehaviour {
 
     public GameObject pause;
     public GameObject pauseScreen;
+    public GameObject homeButton;
 
     
 	// Use this for initialization
@@ -15,6 +16,7 @@ public class PlayPauseToggle : MonoBehaviour {
         //Debug.Log(switcher);
         pause.SetActive(!switcher);
         pauseScreen.SetActive(switcher);
+        homeButton.SetActive(switcher);
         
     }
     
