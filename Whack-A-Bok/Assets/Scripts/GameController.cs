@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
 
     public Camera firstPersonCamera;
     public GameObject Mole;
@@ -39,7 +40,8 @@ public class GameController : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         gameOver = false;
         Pause(false);
@@ -57,14 +59,15 @@ public class GameController : MonoBehaviour {
             isActive[x] = false;
         }
 
-       
-        StartCoroutine(SpawnMoles());
-	}
-	
-	// Update is called once per frame
-	void Update () {
 
-         
+        StartCoroutine(SpawnMoles());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+
         if (timeLeftOver > 0)
         {
             UpdateTime();
@@ -74,18 +77,18 @@ public class GameController : MonoBehaviour {
         {
             GameOver();
         }
-        
+
     }
 
     IEnumerator SpawnMoles()
     {
         yield return new WaitForSeconds(startWait);
-        
-            while (true)
-            {
-                //Debug.Log("Is Running");
-                //choose a hole to pop mole out of
-                int holeNum = Random.Range(0, 9);
+
+        while (true)
+        {
+            //Debug.Log("Is Running");
+            //choose a hole to pop mole out of
+            int holeNum = Random.Range(0, 9);
 
             if (!isActive[holeNum])
             {
@@ -97,7 +100,7 @@ public class GameController : MonoBehaviour {
                 moles[holeNum].transform.rotation = Quaternion.identity;
                 moles[holeNum].SetActive(true);
                 isActive[holeNum] = true;
-                
+
 
                 //Vector3 cameraPositionSameY = firstPersonCamera.transform.position;
                 //cameraPositionSameY.y = -0.5f;
@@ -124,26 +127,25 @@ public class GameController : MonoBehaviour {
                     StartCoroutine(RemoveMole(holeNum));
                 }
 
-
-                }
-                if (gameOver)
-                {
-                    break;
-                }
+                isActive[holeNum] = false;
             }
-            //Debug.Log("Is not running");
+            if (gameOver)
+            {
+                break;
+            }
+        }
+        //Debug.Log("Is not running");
 
-        
+
     }
-    
+
 
     IEnumerator RemoveMole(int holeNum)
     {
         rbMole.detectCollisions = false;
-        yield return new WaitForSeconds(speedOfPop*3);
+        yield return new WaitForSeconds(speedOfPop * 3);
         //Destroy(moles[holeNum]);
         moles[holeNum].SetActive(false);
-        isActive[holeNum] = false;
     }
 
     public void UpdateTime()
@@ -175,7 +177,7 @@ public class GameController : MonoBehaviour {
         }
 
         //Debug.Log("paused is :" + isPaused);
-        
+
 
     }
 
