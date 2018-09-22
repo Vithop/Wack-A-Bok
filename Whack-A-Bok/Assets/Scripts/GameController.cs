@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
 
     public Camera firstPersonCamera;
     public GameObject Mole;
+    public GameObject pooler;
     public int numberOfMoles;
     public Vector3[] spawnValues;
     public float startWait;
@@ -17,8 +18,10 @@ public class GameController : MonoBehaviour {
     public float speedOfPop;
 
     private GameObject[] moles = new GameObject[9];
+    private ObjectPooler molePooler;
     private bool[] isActive = new bool[9];
     private Rigidbody rbMole;
+    private Vector3 moleOffSet = new Vector3(0, 0.5f, 0);
 
 
     public Text gameOverText;
@@ -45,6 +48,8 @@ public class GameController : MonoBehaviour {
         homeBotton.SetActive(false);
         score = 0;
         UpdateScore();
+        molePooler = pooler.GetComponent<ObjectPooler>();
+
 
         //set all holes as inactive on start
         for (int x = 0; x < 9; x++)
@@ -86,8 +91,13 @@ public class GameController : MonoBehaviour {
             {
 
                 //create a mole a record where mole is
-                moles[holeNum] = Instantiate(Mole, spawnValues[holeNum] - new Vector3(0, 0.5f, 0), Quaternion.identity);
+                //moles[holeNum] = Instantiate(Mole, spawnValues[holeNum], Quaternion.identity);
+                moles[holeNum] = molePooler.GetPooledObject();
+                moles[holeNum].transform.position = spawnValues[holeNum] - moleOffSet;
+                moles[holeNum].transform.rotation = Quaternion.identity;
+                moles[holeNum].SetActive(true);
                 isActive[holeNum] = true;
+                
 
                 //Vector3 cameraPositionSameY = firstPersonCamera.transform.position;
                 //cameraPositionSameY.y = -0.5f;
@@ -95,7 +105,8 @@ public class GameController : MonoBehaviour {
 
                 //create rigidbody
                 rbMole = moles[holeNum].GetComponent<Rigidbody>();
-
+                rbMole.velocity = Vector3.zero;
+                rbMole.angularVelocity = Vector3.zero;
                 //poping animation
                 rbMole.detectCollisions = false;
                 rbMole.AddForce(transform.up * forceOfPop);
@@ -130,7 +141,8 @@ public class GameController : MonoBehaviour {
     {
         rbMole.detectCollisions = false;
         yield return new WaitForSeconds(speedOfPop*3);
-        Destroy(moles[holeNum]);
+        //Destroy(moles[holeNum]);
+        moles[holeNum].SetActive(false);
         isActive[holeNum] = false;
     }
 

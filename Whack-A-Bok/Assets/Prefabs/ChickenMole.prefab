@@ -36,8 +36,8 @@ GameObject:
   - component: {fileID: 4602003979262246}
   - component: {fileID: 65950760362689204}
   - component: {fileID: 54890363444974458}
-  - component: {fileID: 114176922811097232}
   - component: {fileID: 114242648528450166}
+  - component: {fileID: 114450856759059924}
   m_Layer: 0
   m_Name: ChickenMole
   m_TagString: Mole
@@ -973,18 +973,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.65, y: 1.4000001, z: 0.7}
   m_Center: {x: -0.017, y: 0.72, z: 0.09}
---- !u!114 &114176922811097232
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1024667159599326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca1de78ccdcde2e44801207ecc4062a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 3
 --- !u!114 &114242648528450166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -996,3 +984,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e50fa2d78bafdb4eaefe3d896605053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114450856759059924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1024667159599326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9904d367bae80446892a6fa88f24154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 3

@@ -12,6 +12,7 @@ public class ThrowWeapon : MonoBehaviour
     public Camera playerCam;
     public GameObject weapon;
     public GameObject playerWeapon;
+    public GameObject pooler;
     public Text DebugText; //remove later
     public float fireRate;
     public float speed;
@@ -23,12 +24,14 @@ public class ThrowWeapon : MonoBehaviour
     private Vector3 weaponTarget;
     private Vector3 initialPos;
     private Rigidbody hammer_rb;
-
-
+    private ObjectPooler hammerPooler;
+    
+    
     // Use this for initialization
     void Start()
     {
         throwWeapon = false;
+        hammerPooler = pooler.GetComponent<ObjectPooler>();
         
     }
 
@@ -70,7 +73,7 @@ public class ThrowWeapon : MonoBehaviour
     {
         if (throwWeapon)
         {
-            MakeWeapon();
+            GetWeapon();
             hammer_rb.constraints = RigidbodyConstraints.None;
             if (weaponTarget == new Vector3(0, 0, 0))
                 return;
@@ -85,21 +88,36 @@ public class ThrowWeapon : MonoBehaviour
     }
 
 
-    void MakeWeapon()
-    {
-        //Debug.Log("Weapon is being made");
+    //void MakeWeapon()
+    //{
+    //    //Debug.Log("Weapon is being made");
 
+    //    initialPos = playerWeapon.transform.position + (1f * new Vector3(0f, 0.25f, 0.75f));
+    //    Quaternion weaponRot = playerWeapon.transform.rotation;
+
+    //    GameObject newWeapon = Instantiate(weapon, initialPos, weaponRot);
+    //    hammer_rb = newWeapon.GetComponent<Rigidbody>();
+    //    hammer_rb.constraints = RigidbodyConstraints.FreezeAll;
+    //    newWeapon.transform.SetParent(gameObject.transform);
+
+    //    //Debug.Log("Weapon is made");        
+    //}
+
+    void GetWeapon()
+    {
         initialPos = playerWeapon.transform.position + (1f * new Vector3(0f, 0.25f, 0.75f));
         Quaternion weaponRot = playerWeapon.transform.rotation;
 
-        GameObject newWeapon = Instantiate(weapon, initialPos, weaponRot);
+        GameObject newWeapon = hammerPooler.GetPooledObject();
+
+        newWeapon.transform.position =  initialPos;
+        newWeapon.transform.rotation = weaponRot;
+
         hammer_rb = newWeapon.GetComponent<Rigidbody>();
         hammer_rb.constraints = RigidbodyConstraints.FreezeAll;
         newWeapon.transform.SetParent(gameObject.transform);
 
-        //Debug.Log("Weapon is made");
-
-        
+        newWeapon.SetActive(true);
     }
 
     /*Vector3 BallisticVel( Vector3 target, Vector3 initial, Vector3 offSet, float angle ) {
