@@ -20,8 +20,8 @@ public class SwipeThrowWeapon : MonoBehaviour {
     // Use this for initialization
     void Start () {
         throwWeapon = false;
-        originalWeaponPos = playerWeapon.transform.position;
-        originalWeaponRot = playerWeapon.transform.rotation;
+        originalWeaponPos = playerWeapon.transform.localPosition;
+        originalWeaponRot = playerWeapon.transform.localRotation;
         playerWeapon.AddComponent<Rigidbody>();
         var rb = playerWeapon.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
@@ -38,35 +38,43 @@ public class SwipeThrowWeapon : MonoBehaviour {
 
         Touch touch = Input.GetTouch(0);
         Vector2 deltaTouchPos = Vector2.zero;
+        float touchMagnitude = 0f;
 
         switch (touch.phase)
         {
             case TouchPhase.Began:
+                DebugText.text = "Touch Begin";
 
-         
+
                 break;
 
-            case TouchPhase.Moved:
+                case TouchPhase.Moved:
+                DebugText.text = "Touch Moved";
                 deltaTouchPos = touch.deltaPosition;
-                DebugText.text = "deltaTouchPos" + deltaTouchPos;
-                playerWeapon.transform.Translate(deltaTouchPos*0.1f, gameObject.transform);
+                touchMagnitude = deltaTouchPos.sqrMagnitude;
+                DebugText.text = "Mag & Pos:  " + touchMagnitude + ", " + deltaTouchPos;
+                playerWeapon.transform.Translate(deltaTouchPos*0.0001f, gameObject.transform);
                 break;
 
             case TouchPhase.Ended:
-                if(deltaTouchPos.magnitude > 1)
+                DebugText.text = "Touch Ended";
+                if (touchMagnitude > 0.0001)
                 {
-                    weaponVector = new Vector3 (deltaTouchPos.x, deltaTouchPos.y, deltaTouchPos.magnitude);
+                    weaponVector = new Vector3 (deltaTouchPos.x,touchMagnitude , deltaTouchPos.y) + gameObject.transform.forward;
                     throwWeapon = true;
                     var dT = playerWeapon.GetComponent<DestroyByTime>();
                     dT.enabled = true;
+                    DebugText.text = "Touch Trow, WeaponV: " + weaponVector;
+
                 }
                 else
                 {
-                    throwWeapon = false;
-                    playerWeapon.transform.position = originalWeaponPos;
+                    throwWeapon = true;
+                    playerWeapon.transform.localPosition = originalWeaponPos;
+                    DebugText.text = "Touch End, WeaponV: " + Vector3.zero;
 
                 }
-                
+
                 break;
         }
 
@@ -82,7 +90,7 @@ public class SwipeThrowWeapon : MonoBehaviour {
             rb.constraints = RigidbodyConstraints.None;
             if (weaponVector == new Vector3(0, 0, 0))
                 return;
-            rb.AddForce(weaponVector * 500);
+            rb.AddForce(weaponVector * 50);
             DebugText.text = "Weapon is thrown";
             throwWeapon = false;
             var thrownWeapon = playerWeapon;
