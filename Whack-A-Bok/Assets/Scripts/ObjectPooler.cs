@@ -32,6 +32,7 @@ public class ObjectPooler : MonoBehaviour {
         {
             if (!pooledObjects[i].activeInHierarchy)
             {
+                pooledObjects[i].tag = "Mole";
                 return pooledObjects[i];
             }
         }

@@ -24,6 +24,7 @@ public class ThrowWeapon : MonoBehaviour
     private Vector3 weaponTarget;
     private Vector3 initialPos;
     private Rigidbody hammer_rb;
+    private Rigidbody player_rb;
     private ObjectPooler hammerPooler;
     
     
@@ -32,6 +33,7 @@ public class ThrowWeapon : MonoBehaviour
     {
         throwWeapon = false;
         hammerPooler = pooler.GetComponent<ObjectPooler>();
+        player_rb = gameObject.GetComponent<Rigidbody>();
         
     }
 
@@ -135,7 +137,7 @@ public class ThrowWeapon : MonoBehaviour
 
     Vector3 ThrowingVec(Vector3 target, Vector3 initial, Vector3 offSet, float speed)
     {
-        return (target + offSet - initial) * speed;
+        return ((target + offSet - initial) * speed) - player_rb.GetPointVelocity(Vector3.zero);
     }  
 
 }

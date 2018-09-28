@@ -83,6 +83,7 @@ public class GameController : MonoBehaviour
     IEnumerator SpawnMoles()
     {
         yield return new WaitForSeconds(startWait);
+        int lastHoleNum = -1;
 
         while (true)
         {
@@ -90,9 +91,9 @@ public class GameController : MonoBehaviour
             //choose a hole to pop mole out of
             int holeNum = Random.Range(0, 9);
 
-            if (!isActive[holeNum])
+            if (holeNum != lastHoleNum)
             {
-
+                lastHoleNum = holeNum;
                 //create a mole a record where mole is
                 //moles[holeNum] = Instantiate(Mole, spawnValues[holeNum], Quaternion.identity);
                 moles[holeNum] = molePooler.GetPooledObject();
@@ -133,6 +134,7 @@ public class GameController : MonoBehaviour
             {
                 break;
             }
+            
         }
         //Debug.Log("Is not running");
 
@@ -194,4 +196,5 @@ public class GameController : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
 }
