@@ -79,11 +79,12 @@ public class ThrowWeapon : MonoBehaviour
             hammer_rb.constraints = RigidbodyConstraints.None;
             if (weaponTarget == new Vector3(0, 0, 0))
                 return;
+            Vector3 offSetFinal = gameObject.transform.rotation * offSet;
             //Vector3 ForceVector = ( (weaponTarget-playerWeapon.transform.position) * 100f);
             //rb.AddForce(ForceVector.x,ForceVector.y,ForceVector.z);
             //DebugText.text = "Target Points: " + initialPos + " : " + weaponTarget; // remove later
             //rb.AddForce(ThrowingVec(weaponTarget, initialPos, offSet, speed));
-            hammer_rb.velocity = ThrowingVec(weaponTarget, initialPos, offSet, speed);
+            hammer_rb.velocity = ThrowingVec(weaponTarget, initialPos, offSetFinal, speed);
             //Debug.Log("Weapon is thrown");
             throwWeapon = false;
         }
@@ -137,7 +138,9 @@ public class ThrowWeapon : MonoBehaviour
 
     Vector3 ThrowingVec(Vector3 target, Vector3 initial, Vector3 offSet, float speed)
     {
-        return ((target + offSet - initial) * speed) - player_rb.GetPointVelocity(Vector3.zero);
-    }  
+            DebugText.text = "Target Points: " + target + " : " + initial + " : " + player_rb.velocity; // remove later
+            return ((target + offSet - initial) - player_rb.velocity)*speed;
+
+    }
 
 }
