@@ -89,10 +89,17 @@ public class ThrowWeapon : MonoBehaviour
     {
         //Debug.Log("Weapon is being made");
 
-        initialPos = playerWeapon.transform.position + (1f * new Vector3(0f, 0.25f, 0.75f));
+        offSet = 
+        initialPos = playerWeapon.transform.position + transform.TransformPoint( (0.01f * new Vector3(0f, 0.25f, 0.75f)) );
         Quaternion weaponRot = playerWeapon.transform.rotation;
-
+        
         GameObject newWeapon = Instantiate(weapon, initialPos, weaponRot);
+        GameObject stationaryWeapon = Instantiate(weapon, initialPos, weaponRot);
+
+        Rigidbody statWeapon_rb = stationaryWeapon.GetComponent<Rigidbody>();
+        statWeapon_rb.constraints = RigidbodyConstraints.FreezeAll;
+        stationaryWeapon.transform.SetParent(gameObject.transform);
+
         hammer_rb = newWeapon.GetComponent<Rigidbody>();
         hammer_rb.constraints = RigidbodyConstraints.FreezeAll;
         newWeapon.transform.SetParent(gameObject.transform);
