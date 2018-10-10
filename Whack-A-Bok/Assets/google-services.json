@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "414939946491",
+    "firebase_url": "https://wack-a-bok.firebaseio.com",
+    "project_id": "wack-a-bok",
+    "storage_bucket": "wack-a-bok.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414939946491:android:57e20be65d8c0919",
+        "android_client_info": {
+          "package_name": "com.DevBears.WhackABok"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414939946491-6lv0gcucdrd5td3sfoavqk1fcaajmu1h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0fiVUosWfeRcDDVcfvSFB0HY9z2rHykY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
