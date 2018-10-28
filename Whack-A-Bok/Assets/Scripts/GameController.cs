@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
 
     public Camera firstPersonCamera;
     public GameObject Mole;
+    public GameObject pooler;
     public int numberOfMoles;
     public Vector3[] spawnValues;
     public float startWait;
@@ -17,8 +19,10 @@ public class GameController : MonoBehaviour {
     public float speedOfPop;
 
     private GameObject[] moles = new GameObject[9];
+    private ObjectPooler molePooler;
     private bool[] isActive = new bool[9];
     private Rigidbody rbMole;
+    private Vector3 moleOffSet = new Vector3(0, 0.5f, 0);
 
 
     public Text gameOverText;
@@ -36,7 +40,8 @@ public class GameController : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         gameOver = false;
         Pause(false);
@@ -45,6 +50,8 @@ public class GameController : MonoBehaviour {
         homeBotton.SetActive(false);
         score = 0;
         UpdateScore();
+        molePooler = pooler.GetComponent<ObjectPooler>();
+
 
         //set all holes as inactive on start
         for (int x = 0; x < 9; x++)
@@ -52,14 +59,15 @@ public class GameController : MonoBehaviour {
             isActive[x] = false;
         }
 
-       
-        StartCoroutine(SpawnMoles());
-	}
-	
-	// Update is called once per frame
-	void Update () {
 
-         
+        StartCoroutine(SpawnMoles());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+
         if (timeLeftOver > 0)
         {
             UpdateTime();
@@ -69,25 +77,31 @@ public class GameController : MonoBehaviour {
         {
             GameOver();
         }
-        
+
     }
 
     IEnumerator SpawnMoles()
     {
         yield return new WaitForSeconds(startWait);
-        
-            while (true)
-            {
-                //Debug.Log("Is Running");
-                //choose a hole to pop mole out of
-                int holeNum = Random.Range(0, 9);
+        int lastHoleNum = -1;
 
-            if (!isActive[holeNum])
-            {
+        while (true)
+        {
+            //Debug.Log("Is Running");
+            //choose a hole to pop mole out of
+            int holeNum = Random.Range(0, 9);
 
+            if (holeNum != lastHoleNum)
+            {
+                lastHoleNum = holeNum;
                 //create a mole a record where mole is
-                moles[holeNum] = Instantiate(Mole, spawnValues[holeNum] - new Vector3(0, 0.5f, 0), Quaternion.identity);
+                //moles[holeNum] = Instantiate(Mole, spawnValues[holeNum], Quaternion.identity);
+                moles[holeNum] = molePooler.GetPooledObject();
+                moles[holeNum].transform.position = spawnValues[holeNum] - moleOffSet;
+                moles[holeNum].transform.rotation = Quaternion.identity;
+                moles[holeNum].SetActive(true);
                 isActive[holeNum] = true;
+
 
                 //Vector3 cameraPositionSameY = firstPersonCamera.transform.position;
                 //cameraPositionSameY.y = -0.5f;
@@ -95,7 +109,8 @@ public class GameController : MonoBehaviour {
 
                 //create rigidbody
                 rbMole = moles[holeNum].GetComponent<Rigidbody>();
-
+                rbMole.velocity = Vector3.zero;
+                rbMole.angularVelocity = Vector3.zero;
                 //poping animation
                 rbMole.detectCollisions = false;
                 rbMole.AddForce(transform.up * forceOfPop);
@@ -113,25 +128,26 @@ public class GameController : MonoBehaviour {
                     StartCoroutine(RemoveMole(holeNum));
                 }
 
-
-                }
-                if (gameOver)
-                {
-                    break;
-                }
+                isActive[holeNum] = false;
             }
-            //Debug.Log("Is not running");
+            if (gameOver)
+            {
+                break;
+            }
+            
+        }
+        //Debug.Log("Is not running");
 
-        
+
     }
-    
+
 
     IEnumerator RemoveMole(int holeNum)
     {
         rbMole.detectCollisions = false;
-        yield return new WaitForSeconds(speedOfPop*3);
-        Destroy(moles[holeNum]);
-        isActive[holeNum] = false;
+        yield return new WaitForSeconds(speedOfPop * 3);
+        //Destroy(moles[holeNum]);
+        moles[holeNum].SetActive(false);
     }
 
     public void UpdateTime()
@@ -163,7 +179,7 @@ public class GameController : MonoBehaviour {
         }
 
         //Debug.Log("paused is :" + isPaused);
-        
+
 
     }
 
@@ -180,4 +196,5 @@ public class GameController : MonoBehaviour {
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
 }

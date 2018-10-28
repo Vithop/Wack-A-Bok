@@ -12,6 +12,7 @@ public class ThrowWeapon : MonoBehaviour
     public Camera playerCam;
     public GameObject weapon;
     public GameObject playerWeapon;
+    public GameObject pooler;
     public Text DebugText; //remove later
     public float fireRate;
     public float speed;
@@ -23,12 +24,16 @@ public class ThrowWeapon : MonoBehaviour
     private Vector3 weaponTarget;
     private Vector3 initialPos;
     private Rigidbody hammer_rb;
-
-
+    private Rigidbody player_rb;
+    private ObjectPooler hammerPooler;
+    
+    
     // Use this for initialization
     void Start()
     {
         throwWeapon = false;
+        hammerPooler = pooler.GetComponent<ObjectPooler>();
+        player_rb = gameObject.GetComponent<Rigidbody>();
         
     }
 
@@ -70,36 +75,52 @@ public class ThrowWeapon : MonoBehaviour
     {
         if (throwWeapon)
         {
-            MakeWeapon();
+            GetWeapon();
             hammer_rb.constraints = RigidbodyConstraints.None;
             if (weaponTarget == new Vector3(0, 0, 0))
                 return;
+            Vector3 offSetFinal = gameObject.transform.rotation * offSet;
             //Vector3 ForceVector = ( (weaponTarget-playerWeapon.transform.position) * 100f);
             //rb.AddForce(ForceVector.x,ForceVector.y,ForceVector.z);
             //DebugText.text = "Target Points: " + initialPos + " : " + weaponTarget; // remove later
             //rb.AddForce(ThrowingVec(weaponTarget, initialPos, offSet, speed));
-            hammer_rb.velocity = ThrowingVec(weaponTarget, initialPos, offSet, speed);
+            hammer_rb.velocity = ThrowingVec(weaponTarget, initialPos, offSetFinal, speed);
             //Debug.Log("Weapon is thrown");
             throwWeapon = false;
         }
     }
 
 
-    void MakeWeapon()
-    {
-        //Debug.Log("Weapon is being made");
+    //void MakeWeapon()
+    //{
+    //    //Debug.Log("Weapon is being made");
 
+    //    initialPos = playerWeapon.transform.position + (1f * new Vector3(0f, 0.25f, 0.75f));
+    //    Quaternion weaponRot = playerWeapon.transform.rotation;
+
+    //    GameObject newWeapon = Instantiate(weapon, initialPos, weaponRot);
+    //    hammer_rb = newWeapon.GetComponent<Rigidbody>();
+    //    hammer_rb.constraints = RigidbodyConstraints.FreezeAll;
+    //    newWeapon.transform.SetParent(gameObject.transform);
+
+    //    //Debug.Log("Weapon is made");        
+    //}
+
+    void GetWeapon()
+    {
         initialPos = playerWeapon.transform.position + (1f * new Vector3(0f, 0.25f, 0.75f));
         Quaternion weaponRot = playerWeapon.transform.rotation;
 
-        GameObject newWeapon = Instantiate(weapon, initialPos, weaponRot);
+        GameObject newWeapon = hammerPooler.GetPooledObject();
+
+        newWeapon.transform.position =  initialPos;
+        newWeapon.transform.rotation = weaponRot;
+
         hammer_rb = newWeapon.GetComponent<Rigidbody>();
         hammer_rb.constraints = RigidbodyConstraints.FreezeAll;
         newWeapon.transform.SetParent(gameObject.transform);
 
-        //Debug.Log("Weapon is made");
-
-        
+        newWeapon.SetActive(true);
     }
 
     /*Vector3 BallisticVel( Vector3 target, Vector3 initial, Vector3 offSet, float angle ) {
@@ -117,7 +138,9 @@ public class ThrowWeapon : MonoBehaviour
 
     Vector3 ThrowingVec(Vector3 target, Vector3 initial, Vector3 offSet, float speed)
     {
-        return (target + offSet - initial) * speed;
-    }  
+            DebugText.text = "Target Points: " + target + " : " + initial + " : " + player_rb.velocity; // remove later
+            return ((target + offSet - initial) - player_rb.velocity)*speed;
+
+    }
 
 }
