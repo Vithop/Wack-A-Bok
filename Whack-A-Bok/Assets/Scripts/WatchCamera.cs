@@ -14,7 +14,7 @@ public class WatchCamera : MonoBehaviour {
 	void Update () {
         Vector3 cameraPositionSameY = firstPersonCamera.transform.position;
         cameraPositionSameY.y = -0.5f;
-        gameObject.transform.LookAt(cameraPositionSameY, gameObject.transform.up);
+        gameObject.transform.LookAt(cameraPositionSameY);
 
     }
 }
