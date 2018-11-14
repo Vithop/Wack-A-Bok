@@ -8,6 +8,6 @@ Use your hammer to smack those chicken by throwing it at them by tapping the scr
 
 Pictures of current progress of game
 ![AR](https://github.com/Vithop/Wack-A-Bok/blob/master2/Screenshot_20181114-111823.png) 
-![AR](https://github.com/Vithop/Wack-A-Bok/blob/master2/Screenshot_20181114-111958.png) 
+![AR](https://github.com/Vithop/Wack-A-Bok/blob/master2/Screenshot_20181114-111958.png, width = 300, height = 400) 
 ![AR](https://github.com/Vithop/Wack-A-Bok/blob/master2/Screenshot_20181114-112031.png) 
 
