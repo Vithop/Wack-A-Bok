@@ -62,6 +62,8 @@ namespace GoogleARCore.Examples.HelloAR
         public GameObject restartButton;
         public GameObject homeBotton;
 
+        
+
 
 
 
@@ -221,6 +223,7 @@ namespace GoogleARCore.Examples.HelloAR
                     SetSpawnValues(field);
                     StartCoroutine(SpawnMoles());
                     isFieldPlaced = true;
+                    Debug.Log("Field is Placed");
                 }
             }
         }
@@ -295,7 +298,7 @@ namespace GoogleARCore.Examples.HelloAR
                 }
 
             }
-            //Debug.Log("Is not running");
+            Debug.Log("Is not running");
         }
 
         IEnumerator RemoveMole(int holeNum)
@@ -334,7 +337,7 @@ namespace GoogleARCore.Examples.HelloAR
                 Time.timeScale = 1;
             }
 
-            //Debug.Log("paused is :" + isPaused);
+            Debug.Log("paused is :" + isPaused);
 
 
         }
@@ -362,7 +365,7 @@ namespace GoogleARCore.Examples.HelloAR
             // Pause the app when the 'back' button is pressed.
             if (Input.GetKey(KeyCode.Escape))
             {
-                paused = true;
+                Application.Quit();
             }
 
             // Only allow the screen to sleep when not tracking.
