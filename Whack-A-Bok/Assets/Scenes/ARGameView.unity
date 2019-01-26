@@ -165,6 +165,11 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 20155940112608238, guid: c10877f7cd5764de18d46d7b777d1faa,
+        type: 2}
+      propertyPath: field of view
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c10877f7cd5764de18d46d7b777d1faa, type: 2}
   m_IsPrefabAsset: 0
@@ -1384,7 +1389,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 896679035}
-  m_PlaneDistance: 1
+  m_PlaneDistance: 0.2
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -1938,15 +1943,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4226532080069330, guid: 0e77a34b9ced2a14eaa4783d15a42e43, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.114
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4226532080069330, guid: 0e77a34b9ced2a14eaa4783d15a42e43, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.091
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4226532080069330, guid: 0e77a34b9ced2a14eaa4783d15a42e43, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.266
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4226532080069330, guid: 0e77a34b9ced2a14eaa4783d15a42e43, type: 2}
       propertyPath: m_LocalRotation.x

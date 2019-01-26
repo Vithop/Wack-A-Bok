@@ -45,7 +45,8 @@ public class ThrowWeapon : MonoBehaviour
             return;
         }
         nextFire = Time.time + fireRate;
-        //Debug.Log("Touch detected");
+        Debug.Log("Touch detected");
+        DebugText.text = "Touch detected";
 
         var ray = playerCam.ScreenPointToRay(Input.touches[0].position);
         Touch touch = Input.GetTouch(0);
