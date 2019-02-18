@@ -13,7 +13,8 @@ public class WatchCamera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Vector3 cameraPositionSameY = firstPersonCamera.transform.position;
-        cameraPositionSameY.y = -0.5f;
+        cameraPositionSameY.y = gameObject.transform.position.y;
+        Debug.Log("Position of Camera "+firstPersonCamera.transform.position);
         gameObject.transform.LookAt(cameraPositionSameY);
 
     }

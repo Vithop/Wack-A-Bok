@@ -13,7 +13,7 @@ public class PlayPauseToggle : MonoBehaviour {
 	// Use this for initialization
 	public void Toggle(bool switcher)
     {
-        //Debug.Log(switcher);
+        Debug.Log("Switcher is "+switcher);
         pause.SetActive(!switcher);
         pauseScreen.SetActive(switcher);
         homeButton.SetActive(switcher);

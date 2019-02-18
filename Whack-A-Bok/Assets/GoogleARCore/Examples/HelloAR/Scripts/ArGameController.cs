@@ -62,6 +62,8 @@ namespace GoogleARCore.Examples.HelloAR
         public GameObject restartButton;
         public GameObject homeBotton;
 
+        public Text DebugText;
+
         
 
 
@@ -139,7 +141,8 @@ namespace GoogleARCore.Examples.HelloAR
         /// </summary>
         public void Update()
         {
-            _UpdateApplicationLifecycle();
+            //_UpdateApplicationLifecycle();
+
             if (!isFieldPlaced) { PlaceGameField(); }
             else
             {
@@ -330,14 +333,17 @@ namespace GoogleARCore.Examples.HelloAR
 
             if (isPaused)
             {
+                //DebugText.text = "time scale is 0";
                 Time.timeScale = 0;
             }
             else
             {
+                //DebugText.text = "time scale is 1";
                 Time.timeScale = 1;
             }
 
-            Debug.Log("paused is :" + isPaused);
+            //Debug.Log("paused is :" + isPaused);
+            //DebugText.text = "Paused is :" + isPaused;
 
 
         }
