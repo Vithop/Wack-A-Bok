@@ -1293,7 +1293,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &371994088
 GameObject:
@@ -4049,7 +4049,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1188846835}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41d5c2183be42c04fbc7e2aae7acbc29, type: 3}
   m_Name: 
@@ -4069,7 +4069,7 @@ MonoBehaviour:
   playerCam: {fileID: 487725686}
   weapon: {fileID: 1274358825888842, guid: 0e77a34b9ced2a14eaa4783d15a42e43, type: 2}
   playerWeapon: {fileID: 1246702107}
-  pooler: {fileID: 1850639266}
+  pooler: {fileID: 0}
   DebugText: {fileID: 962987700}
   fireRate: 0.1
   speed: 5
@@ -6841,50 +6841,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1823555423}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1850639266
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1850639268}
-  - component: {fileID: 1850639267}
-  m_Layer: 0
-  m_Name: HammerPooler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1850639267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1850639266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 557608e4f6ae0c840827cfe85a3f0663, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledObject: {fileID: 1274358825888842, guid: 0e77a34b9ced2a14eaa4783d15a42e43,
-    type: 2}
-  pooledAmount: 10
-  willGrow: 1
---- !u!4 &1850639268
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1850639266}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1874926833
 GameObject:
   m_ObjectHideFlags: 0
@@ -7063,7 +7019,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebef2a2120c2e6243add529151c7cc11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstPersonCamera: {fileID: 487725686}
   Mole: {fileID: 1024667159599326, guid: 4f2a792c0029229408d0ca5590cf059d, type: 2}
   pooler: {fileID: 342025267}
   numberOfMoles: 9

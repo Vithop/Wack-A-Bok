@@ -45,7 +45,8 @@ public class ThrowWeapon : MonoBehaviour
             return;
         }
         nextFire = Time.time + fireRate;
-        //Debug.Log("Touch detected");
+        Debug.Log("Touch detected");
+        //DebugText.text = "Touch detected";//remove later
 
         var ray = playerCam.ScreenPointToRay(Input.touches[0].position);
         Touch touch = Input.GetTouch(0);
@@ -54,7 +55,7 @@ public class ThrowWeapon : MonoBehaviour
         switch (touch.phase)
         {
             case TouchPhase.Began:
-
+               
                 if (Physics.Raycast(ray, out hitInfo))
                 {
                     /*if (hitInfo.transform.name != "GameField" || !hitInfo.transform.name.Contains("Mole"))
@@ -85,7 +86,7 @@ public class ThrowWeapon : MonoBehaviour
             //DebugText.text = "Target Points: " + initialPos + " : " + weaponTarget; // remove later
             //rb.AddForce(ThrowingVec(weaponTarget, initialPos, offSet, speed));
             hammer_rb.velocity = ThrowingVec(weaponTarget, initialPos, offSetFinal, speed);
-            //Debug.Log("Weapon is thrown");
+            Debug.Log("Weapon is thrown");
             throwWeapon = false;
         }
     }
@@ -108,7 +109,7 @@ public class ThrowWeapon : MonoBehaviour
 
     void GetWeapon()
     {
-        initialPos = playerWeapon.transform.position + (1f * new Vector3(0f, 0.25f, 0.75f));
+        initialPos = playerWeapon.transform.position + (0.1f * new Vector3(0f, 0.25f, 0.75f));
         Quaternion weaponRot = playerWeapon.transform.rotation;
 
         GameObject newWeapon = hammerPooler.GetPooledObject();

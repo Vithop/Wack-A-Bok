@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
 
-    public Camera firstPersonCamera;
     public GameObject Mole;
     public GameObject pooler;
     public int numberOfMoles;
