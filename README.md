@@ -7,6 +7,8 @@ An interactive game which creates an AR wack-A-mole table and instead of mole yo
 Use your hammer to smack those chicken by throwing it at them by tapping the screen.
 
 Pictures of current progress of game
+
+
 ![AR](https://github.com/Vithop/Wack-A-Bok/blob/master2/pok-bok%20front%20cover.png) 
 
 ![AR](https://github.com/Vithop/Wack-A-Bok/blob/master2/game%20field.png =300x400) 
