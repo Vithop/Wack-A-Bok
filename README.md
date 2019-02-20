@@ -11,7 +11,7 @@ Pictures of current progress of game
 
 ![AR](https://github.com/Vithop/Wack-A-Bok/blob/master2/pok-bok%20front%20cover.png) 
 
-![AR](https://github.com/Vithop/Wack-A-Bok/blob/master2/game%20field.png =300x400) 
+![AR](https://github.com/Vithop/Wack-A-Bok/blob/master2/game%20field.png) 
 
 ![AR](https://github.com/Vithop/Wack-A-Bok/blob/master2/Screenshot_20181114-111823.png) 
 
